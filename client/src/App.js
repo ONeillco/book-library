@@ -1,19 +1,24 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/Home';
 import Nav from './components/Nav';
-// import './App.css';
+import { UserProvider } from './context/user';
 
-function App(props) {
+function App() {
   return (
-    <div>
-      <UseProvider>
-        <Nav />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-        </Routes>
-      </UseProvider>
+    
+      <Router>
+      <div>
+<UserProvider>
+  <Nav />
+  <Routes>
+  <Route exact path="/" element={<Home />} />
+  </Routes>
+</UserProvider>
     </div>
+    </Router>
+     
+    
   );
 }
 
