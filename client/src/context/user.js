@@ -14,8 +14,21 @@ function UserProvider({ children }) {
     })
   }, [])
 
+  const login = () => {
+
+  }
+
+  const logout = () => {
+    
+  }
+
+  const signup = () => {
+
+  }
+
+
   return (
-    <UserContext.Provider value={{user}}>
+    <UserContext.Provider value={{user, login, signup, logout}}>
         {children}
     </UserContext.Provider>
   )
