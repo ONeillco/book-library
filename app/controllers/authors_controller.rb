@@ -17,6 +17,9 @@ class AuthorsController < ApplicationController
 
   def show
     author = current_user.authors.find_by(id: params{:id})
+    if author 
+      render json: author
+    else
     render json: { error: "Not Found" }, status: :unauthorized
   end
 end
@@ -25,7 +28,7 @@ def destroy
   author = current_user.author.find_by(id: params[:id])
   if author
     author.update(author_params)
-    render json: author status: :accepted
+    render json: author 
   else
     render json: { error: "Author Not Found"}, status: :not_found
   end

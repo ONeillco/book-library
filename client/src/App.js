@@ -5,6 +5,7 @@ import Login from './components/sessions/Login'
 import Nav from './components/navigation/Nav';
 import Signup from './components/sessions/Signup'
 import {UserProvider } from './components/context/user'
+import Authors from './components/Authors';
 
 
 function App(props) {
@@ -17,6 +18,7 @@ function App(props) {
           <Route exact path="/" element={<Home />} /> 
           <Route exact path="/signup" element={<Signup />} /> 
           <Route exact path="/login" element={<Login />} /> 
+          <Route exact path="/authors" element={<Authors />} /> 
         </Routes>
       </UserProvider>
     </div>

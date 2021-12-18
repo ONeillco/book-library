@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
 
-  resources :author 
+  resources :authors 
   resources :books
   
   # Routing logic: fallback requests for React Router.
