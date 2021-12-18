@@ -12,28 +12,28 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // fetch('/signup',{
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({
-    //         username: username,
-    //         password: password,
-    //         password_confirmation: passwordConfirmation
-    //   })
-    // })
-    // .then(res => res.json())
-    // .then(user => {
-    //     if (!user.errors) {
-    //       signup(user)
-    //       navigate('/')
-    //     } else {
-    //       setUsername("")
-    //       setPassword("")
-    //       setPasswordConfirmation("")
-    //       const errorLis = user.errors.map(e => <li>(e)</li>)
-    //       setErrorsList(errorLis)
-    //     }
-    // }) 
+    fetch('/signup',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+            username: username,
+            password: password,
+            password_confirmation: passwordConfirmation
+      })
+    })
+    .then(res => res.json())
+    .then(user => {
+        if (!user.errors) {
+          signup(user)
+          navigate('/')
+        } else {
+          setUsername("")
+          setPassword("")
+          setPasswordConfirmation("")
+          const errorLis = user.errors.map(e => <li>(e)</li>)
+          setErrorsList(errorLis)
+        }
+    }) 
   }
   return (
     <div>

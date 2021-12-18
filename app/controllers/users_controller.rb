@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  class UsersController < ApplicationController
     # signup
     def create 
       user = User.create(user_params)
