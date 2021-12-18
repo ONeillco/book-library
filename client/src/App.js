@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from './context/Home'
-import Login from './components/Login'
-import Nav from './components/Nav'
-import Signup from './components/Signup'
-import {UserProvider } from './context/user'
+import Home from './components/context/Home'
+import Login from './components/sessions/Login'
+import Nav from './components/navigation/Nav';
+import Signup from './components/sessions/Signup'
+import {UserProvider } from './components/context/user'
 
 
 function App(props) {
