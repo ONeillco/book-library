@@ -24,11 +24,21 @@ class AuthorsController < ApplicationController
   end
 end
 
-def destroy
-  author = current_user.author.find_by(id: params[:id])
+def update
+  author = current_user. authors.find_by(id: params[:id])
   if author
     author.update(author_params)
-    render json: author 
+    render json: author
+  else
+    render json: { error: "Author not found" }, status: :not_found
+  end
+end
+
+def destroy
+  author = current_user.authors.find_by(id: params[:id])
+  if author
+    author.destroy
+    head :no_content
   else
     render json: { error: "Author Not Found"}, status: :not_found
   end
@@ -37,11 +47,11 @@ end
 private
 
 def current_user
-  User.find_by(id: session[:user_id])
+   User.find_by(id: session[:user_id])
 end
 
 def author_params
-  params.permit( :name, :origin, :category )
+  params.permit( :name  )
 end
 
 def authorize

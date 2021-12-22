@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+steven = Author.create(name: "Steven King") # id 1
+tolkien = Author.create(name: "J.R.R. Tolkien") # id 2
+rowling = Author.create(name: "J.K. Rowling") # id 3
+
+
+puts "Done Seeding"
