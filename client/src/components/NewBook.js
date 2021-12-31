@@ -44,11 +44,11 @@ const NewBook = () => {
       headers,
       body: JSON.stringify(state)
     }    
-    await fetch(`/authors/${id}/books`, options)
+    await fetch(`/authors/${id}/books/${id}`, options)
     debugger
 
     // history.push(`/authors/${ authorId }`);
-    navigate(`/authors/${ id }`)
+    navigate(`/books`)
   }
 
   if(loggedIn) {
