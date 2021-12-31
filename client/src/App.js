@@ -1,34 +1,44 @@
-import React from 'react'
+import React from 'react';
 import { Route, Routes } from 'react-router-dom'
-import Home from './components/context/Home'
-import Login from './components/sessions/Login'
-import Nav from './components/navigation/Nav';
-import Signup from './components/sessions/Signup'
-import {UserProvider } from './components/context/user'
-import Authors from './components/Authors';
-import AuthorDetails from './components/AuthorDetails';
-// import Alternate from './components/Alternate';
+
+import Navbar from './components/Navbar';
+import AuthorList from './components/AuthorList';
+import NewAuthor from './components/NewAuthor';
 import EditAuthor from './components/EditAuthor';
+import AuthorDetails from './components/AuthorDetails';
+import BookList from './components/BookList';
+import NewBook from './components/NewBook';
+import BookDetails from './components/BookDetails';
+import Home from './components/Home';
 
+import PageNotFound from './components/PageNotFound';
+import { UserProvider } from './components/context/user';
+import Signup from './components/sessions/Signup';
+import Login from './components/sessions/Login';
 
-function App(props) {
-
+function App() {
   return (
-    <div>
-      <UserProvider>
-        <Nav />
+    
+      <div className="App">
+        <UserProvider>
+        <Navbar />
         <Routes>
-          <Route exact path="/" element={<Home />} /> 
+          <Route exact path="/" element={ <Home />} />
           <Route exact path="/signup" element={<Signup />} /> 
-          <Route exact path="/login" element={<Login />} /> 
-          <Route exact path="/authors" element={<Authors />} /> 
-          {/* <Route exact path="/authors/edit" element={ <Alternate />} /> */}
-          <Route exact path="/authors/edit" element={ <EditAuthor />} />
-          <Route exact path="/authors/:id/edit" element={ <AuthorDetails /> } />
-        </Routes>
-      </UserProvider>
-    </div>
-  )
+//        <Route exact path="/login" element={<Login />} /> 
+          <Route exact path="/authors" element={ <AuthorList />} />
+          <Route exact path="/authors/new" element={ <NewAuthor /> } />
+          <Route exact path="/authors/:id/edit" element={ <EditAuthor/> } />
+          <Route exact path="/authors/:id" element={ <AuthorDetails />} />
+          <Route exact path="/books" element={ <BookList />} />
+          <Route exact path="/authors/:authorId/books/new" element={ <NewBook />} />
+          <Route exact path="/books/:id" element={ <BookDetails />} />
+          <Route element={ PageNotFound } />
+          </Routes>
+         </UserProvider>
+      </div>
+    
+  );
 }
 
-export default App
+export default App;

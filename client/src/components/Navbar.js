@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { NavLink, useNavigate} from 'react-router-dom'
-import { UserContext } from '../context/user'
+import { UserContext } from './context/user'
 
 const Nav = () => {
   const {user, logout, loggedIn} = useContext(UserContext)
@@ -26,6 +26,11 @@ const Nav = () => {
       <button onClick={logoutUser}>Logout</button>
       <ul>
         <li><NavLink to="/authors" ><button>Authors</button></NavLink></li>
+        <li><NavLink to="/books" ><button>Books</button></NavLink></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/books">Books</NavLink></li>
+        <li><NavLink to="/authors">Authors</NavLink></li>
+        <li><NavLink to="/authors/new">Create Author</NavLink></li>
       </ul>
     </div>
    )

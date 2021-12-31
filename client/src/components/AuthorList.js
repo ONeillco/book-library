@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import AuthorCard from './AuthorCard';
+import { UserContext } from './context/user'
+
 
 const AuthorList = () => {
   const [ authors, setAuthors ] = useState([]);
   const [ loading, setLoading ] = useState(true);
+  const { loggedIn } = useContext(UserContext)
 
-  useEffect(async () => {
-    const resp = await fetch('/authors')
-    const data = await resp.json();
-    setAuthors(data);
-    setLoading(false);
+  useEffect(() => {
+    const loadAuthors = async () => {
+      const resp = await fetch(`/authors`)
+      const data = await resp.json();
+      setAuthors(data);
+      setLoading(false);
+    }
+    loadAuthors();
   }, [])
-  
-  // const deleteBook = async id => {
 
-  // }
+  const deleteAuthor = async (id) => {
+    await fetch(`/authors/${ id }`, { method: "DELETE" })
+    removeAuthor( id );
+    debugger
+  }
+  
+  const removeAuthor = id => {
+    setAuthors(authors.filter( author => author.id !== id))
+  }
 
   if(loading){ return <h1>Loading...</h1>}
 
-  const authorCards = authors.map((author, index) => <AuthorCard key={ index } author={ author } />)
+  if(loggedIn) {
+  const authorCards = authors.map((author, index) => <AuthorCard key={ index } author={ author } deleteAuthor={ deleteAuthor }/>)
 
   return (
     <div>
@@ -26,6 +39,30 @@ const AuthorList = () => {
       { authorCards }
     </div>
   )
+} else {
+  return (
+    <h3>Access Denied - Please Signup or Login</h3>
+  )
 }
-
+}
 export default AuthorList
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
