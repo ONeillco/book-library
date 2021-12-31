@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :authors do
   resources :books
   end
+  resources :books
  
   
   # Routing logic: fallback requests for React Router.
