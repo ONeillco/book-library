@@ -15,12 +15,13 @@ const NewBook = () => {
   const { id } = useParams();
  
 
-  useEffect(async (id) => {
+  useEffect(async () => {
     const resp = await fetch(`/authors/${id}`)
     const data = await resp.json();
     debugger
     setAuthor(data);
     setLoading(false);
+    debugger
   }, [])
 
   if(loading){ return <h1>Loading...</h1>};
@@ -35,6 +36,7 @@ const NewBook = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    debugger
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -44,11 +46,10 @@ const NewBook = () => {
       headers,
       body: JSON.stringify(state)
     }    
-    await fetch(`/authors/${id}/books/${id}`, options)
+    await fetch(`/authors/${id}/books`, options)
     debugger
 
-    // history.push(`/authors/${ authorId }`);
-    navigate(`/books`)
+    // navigate(`/books`)
   }
 
   if(loggedIn) {

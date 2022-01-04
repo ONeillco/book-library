@@ -15,6 +15,7 @@ import PageNotFound from './components/PageNotFound';
 import { UserProvider } from './components/context/user';
 import Signup from './components/sessions/Signup';
 import Login from './components/sessions/Login';
+// import AuthorsBook from './components/AuthorsBook';
 
 function App() {
   return (
@@ -31,7 +32,8 @@ function App() {
           <Route exact path="/authors/:id/edit" element={ <EditAuthor/> } />
           <Route exact path="/authors/:id" element={ <AuthorDetails />} />
           <Route exact path="/books" element={ <BookList />} />
-          <Route exact path="/authors/:authorId/books/new" element={ <NewBook />} />
+          <Route exact path="/authors/:id/books/new" element={ <NewBook />} />
+          {/* <Route exact path="/authors/:id/books/:id" element={ <AuthorsBook />} /> */}
           <Route exact path="/books/:id" element={ <BookDetails />} />
           <Route element={ PageNotFound } />
           </Routes>

@@ -11,7 +11,6 @@ const BookDetails = () => {
   useEffect(async () => {
     const resp = await fetch(`/books/${id}`)
     const data = await resp.json();
-
     setBook(data);
     setLoading(false);
 
@@ -21,7 +20,7 @@ const BookDetails = () => {
     return (
       <div>
         <h1>{ book.title }</h1>
-        <p>By: <NavLink to={`/authors/${ book.author.id }`}>{ book.author.name }</NavLink></p>
+        <p>By: <NavLink to={`/authors/${ id }`}>{ book.author.name }</NavLink></p>
         <p>Genre: { book.genre }</p>
       </div>
     )

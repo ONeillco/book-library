@@ -13,6 +13,7 @@ const AuthorDetails = () => {
   useEffect(async () => {
     const resp = await fetch(`/authors/${id}`)
     const data = await resp.json();
+    debugger
     setAuthor(data);
     setLoading(false);
 

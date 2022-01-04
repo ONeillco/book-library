@@ -1,14 +1,15 @@
 class BooksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   # before_action :authorized
+
   # def index
-  #   books = current_user.books
+  #   books = Book.all
   #   render json: books
   # end
 
   def index
     if params[:author_id]
-      author = Author.find(params[:author_id])
+      author = current_user.authors.find(params[:author_id])
       books = author.books
     else
       books = Book.all
@@ -16,27 +17,66 @@ class BooksController < ApplicationController
     render json: books, include: :author
   end
 
-#   def show
-#     book = current_user.books.find_by(id:params[:id])
-#     if book
-#       render json: book
-#     else
-#       render json: {error: "book Not Found"}, status: :not_found
-# end
-# end
-
-def show
-  author = Author.find(params[:id])
-  render json: author
+  def show
+    book = Book.find_by(id:params[:id])
+    if book
+      render json: book
+    else
+      render json: {error: "book Not Found"}, status: :not_found
+end
 end
 
+# def show
+#   author = current_user.authors.find(params[:id])
+#   render json: author
+# end
+
+# does not work yet
+# def create
+#   if params[:author_id]
+#     author = Author.find(params[:author_id])
+#     books = author.books.create(book_params)
+#   render json: book, include: :author
+#   else
+#     render json: { errors: author.errors.full_messages }, status: :unprocessable_entity
+# end
+# end
+
+# def create
+#   if params[:author_id]
+#     author = Author.find(params[:author_id])
+#     books = author.books.create(book_params)
+#   else
+#     books = Book.all
+#   end
+#   render json: books, include: :author
+# end
+
+# og below
+# def create
+#   book = current_author.books.create(book_params)
+#   if book.valid?
+#   render json: book, status: :created
+# else
+#   render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
+# end
+# end
+
+
+# test for book in nested route  
 def create
-  book = current_user.books.create(book_params)
+  book = Book.create(book_params)
+  if book.valid?
   render json: book, status: :created
+else
+  render json: { errors: author.errors.full_messages }, status: :unprocessable_entity
 end
+end
+# Author.find_by(params[:author_id])
+
 
 def destroy
-  book = current_user.books.find_by(id:params[:id])
+  book = Book.find_by(id:params[:id])
   if book
     book.destroy
     head :no_content
@@ -66,15 +106,19 @@ def book_params
   params.permit( :id, :title, :genre, :author_id )
 end
 
-def current_user
-  User.find_by(id: session[:user_id])
+# def current_user
+#   User.find_by(id: session[:user_id])
+# end
+
+def current_author
+  Author.find_by( params[:id])
 end
+
 
 def render_not_found_response
   render json: { error: "Book not found" }, status: :not_found
 end
 
-# def book_params
-#   params.require(:book).permit(:title, :image, :description, :genre, :rating)
-# end
+
 end
+
