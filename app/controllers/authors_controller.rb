@@ -52,7 +52,7 @@ def current_user
 end
 
 def author_params
-  params.permit( :id, :name )
+  params.permit( :name )
 end
 
 def authorize

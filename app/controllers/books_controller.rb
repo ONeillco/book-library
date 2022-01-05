@@ -20,7 +20,7 @@ end
 private
 
 def book_params 
-  params.require(:book).permit( :id, :title, :genre, :author_id )
+  params.require(:book).permit( :title, :genre, )
 end
 
 def current_user
