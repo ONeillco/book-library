@@ -7,10 +7,7 @@ const NewBook = () => {
   const [author, setAuthor] = useState(null);
   const { loggedIn} = useContext(UserContext)
   const navigate = useNavigate()
-  const [state, setState] = useState({
-    title: "",
-    genre: ""
-  })
+  const [book, setBook] = useState([])
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
  
@@ -18,39 +15,42 @@ const NewBook = () => {
   useEffect(async () => {
     const resp = await fetch(`/authors/${id}`)
     const data = await resp.json();
-    debugger
     setAuthor(data);
     setLoading(false);
-    debugger
   }, [])
 
   if(loading){ return <h1>Loading...</h1>};
 
   const handleChange = e => {
-    // change state dynamically for both title and genre
-    setState({
-      ...state,
+    setBook({
+      ...book,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    debugger
-    const headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-    const options = {
-      method: "POST",
-      headers,
-      body: JSON.stringify(state)
-    }    
-    await fetch(`/authors/${id}/books`, options)
-    debugger
-
-    // navigate(`/books`)
+  const addBook = (book) => {
+    fetch(`/authors/${author.id}/books`, {
+      method: 'POST',
+      headers: {
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(book)
+    })
+    .then(res => res.json())
+    .then(data => {
+        setAuthor({
+          ...author,
+          books: [...author.books, data] 
+        })
+        navigate(`/authors/${id}`)
+    })
   }
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    addBook(book)
+  }
+
 
   if(loggedIn) {
   return (
@@ -59,12 +59,12 @@ const NewBook = () => {
       <form onSubmit={ handleSubmit }>
         <div>
           <label htmlFor="title">Title: </label>
-          <input type="text" name="title" id="title" value={ state.title } onChange={ handleChange } />
+          <input type="text" name="title" id="title" value={ book.title } onChange={ handleChange } />
         </div>
         <br />
         <div>
           <label htmlFor="genre">Genre: </label>
-          <input type="text" name="genre" value={ state.genre } onChange={ handleChange } />
+          <input type="text" name="genre" value={ book.genre } onChange={ handleChange } />
         </div>
         <br />
         <input type="submit" value="Create Book" />

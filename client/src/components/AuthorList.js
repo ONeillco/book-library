@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AuthorCard from './AuthorCard';
 import { UserContext } from './context/user'
-// import { useNavigate } from 'react-router-dom'
 
 
 const AuthorList = () => {
   const [ authors, setAuthors ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const { loggedIn } = useContext(UserContext)
-  // const navigate = useNavigate()
 
   useEffect(() => {
     const loadAuthors = async () => {
@@ -23,12 +21,10 @@ const AuthorList = () => {
   const deleteAuthor = async (id) => {
     await fetch(`/authors/${ id }`, { method: "DELETE" })
     removeAuthor( id );
-    debugger
   }
   
   const removeAuthor = id => {
     setAuthors(authors.filter( author => author.id !== id))
-    // navigate(`/authors`)
   }
 
   if(loading){ return <h1>Loading...</h1>}

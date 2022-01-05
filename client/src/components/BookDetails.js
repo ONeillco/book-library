@@ -3,24 +3,28 @@ import { useParams, NavLink } from 'react-router-dom'
 import { UserContext } from './context/user'
 
 const BookDetails = () => {
-  const [ book, setBook ] = useState(null);
+  const [ book, setBook ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const { id } = useParams();
   const { loggedIn} = useContext(UserContext)
 
   useEffect(async () => {
+    debugger
     const resp = await fetch(`/books/${id}`)
-    const data = await resp.json();
+    const data = await resp.json(book);
+    debugger
     setBook(data);
     setLoading(false);
+    debugger
 
   }, [])
 
   if(loggedIn) {
     return (
       <div>
+        <h1>lalalalala</h1>
         <h1>{ book.title }</h1>
-        <p>By: <NavLink to={`/authors/${ id }`}>{ book.author.name }</NavLink></p>
+        <li> <NavLink to={`/authors/${ id }`}>{ book.author.name }</NavLink></li>
         <p>Genre: { book.genre }</p>
       </div>
     )

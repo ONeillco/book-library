@@ -25,7 +25,6 @@ const EditAuthor = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    debugger
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -36,9 +35,7 @@ const EditAuthor = () => {
       headers,
       body: JSON.stringify(body)
     }
-    debugger
     await fetch(`/authors/${ id }`, options)
-    debugger
      
     navigate(`/authors`)
   }

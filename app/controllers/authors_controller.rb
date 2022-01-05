@@ -11,7 +11,7 @@ class AuthorsController < ApplicationController
     if author
       render json: author
     else
-      render json: {error: "book Not Found"}, status: :not_found
+      render json: {error: "Author Not Found"}, status: :not_found
 end
 end
 

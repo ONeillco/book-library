@@ -5,7 +5,6 @@ import BookCard from './BookCard';
 
 const AuthorDetails = () => {
   const [ author, setAuthor ] = useState(null);
-  // const [ book, setBook] = useState(null)
   const [ loading, setLoading ] = useState(true);
   const { id } = useParams();
   const { loggedIn } = useContext(UserContext)
@@ -13,7 +12,6 @@ const AuthorDetails = () => {
   useEffect(async () => {
     const resp = await fetch(`/authors/${id}`)
     const data = await resp.json();
-    debugger
     setAuthor(data);
     setLoading(false);
 
