@@ -7,7 +7,6 @@ import EditAuthor from './components/EditAuthor';
 import AuthorDetails from './components/AuthorDetails';
 import BookList from './components/BookList';
 import NewBook from './components/NewBook';
-import BookDetails from './components/BookDetails';
 import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
 import { UserProvider } from './components/context/user';
@@ -31,7 +30,6 @@ function App() {
           <Route exact path="/authors/:id" element={ <AuthorDetails />} />
           <Route exact path="/books" element={ <BookList />} />
           <Route exact path="/authors/:id/books/new" element={ <NewBook />} />
-          <Route exact path="/books/:id" element={ <BookDetails />} />
           <Route element={ <PageNotFound /> } />
           </Routes>
          </UserProvider>

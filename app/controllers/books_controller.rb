@@ -13,9 +13,19 @@ def destroy
     book.destroy
     head :no_content
   else
-    render json: {error:"book Not Found"}, status: :not_found
+    render json: {error:"Book Not Found"}, status: :not_found
 end
 end
+
+# def destroy
+#   author = current_user.authors.find_by(id: params[:author_id])
+#   book = author.books.find_by(id:params[:id])
+#   if book
+#       book.destroy
+#   else
+#     render json: {error:"Book Not Found"}, status: :not_found
+# end
+# end
 
 private
 

@@ -22,7 +22,7 @@ const BookList = () => {
   }
   
   const removeBook = id => {
-    setBooks(books.filter( book => book.id != id))
+    setBooks(books.filter( book => book.id !== id))
   }
 
   if(loggedIn) {
